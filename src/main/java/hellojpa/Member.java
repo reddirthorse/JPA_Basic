@@ -9,12 +9,13 @@ public class Member {
     private Long id;
     @Column(name = "USER_NAME")
     private String userName;
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
+
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
-
+    @OneToOne
+    @JoinColumn(name = "locker_id")
+    private Locker locker;
     public Long getId() {
         return id;
     }
@@ -37,5 +38,8 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+        team.getMembers().add(this);
     }
+
+
 }
